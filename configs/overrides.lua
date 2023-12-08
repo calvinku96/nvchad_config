@@ -2,16 +2,32 @@ local M = {}
 
 M.treesitter = {
   ensure_installed = {
-    "vim",
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
+    "bash",
+    "bibtex",
     "c",
+    "cmake",
+    "comment",
+    "cpp",
+    "cuda",
+    "diff",
+    "gitignore",
+    "glsl",
+    "hlsl",
+    "java",
+    "json",
+    "lua",
+    "make",
     "markdown",
-    "markdown_inline",
+    "matlab",
+    "meson",
+    "ninja",
+    "perl",
+    "python",
+    "rust",
+    "vim",
+    "yaml",
+    "query",
+    "latex",
   },
   indent = {
     enable = true,
@@ -19,24 +35,29 @@ M.treesitter = {
     --   "python"
     -- },
   },
+  ignore_install = { "fortran" },
+  sync_install = true,
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
 }
 
 M.mason = {
+  PATH="append",
   ensure_installed = {
-    -- lua stuff
     "lua-language-server",
-    "stylua",
-
-    -- web dev stuff
-    "css-lsp",
-    "html-lsp",
-    "typescript-language-server",
-    "deno",
-    "prettier",
-
-    -- c/cpp stuff
+    "bash-language-server",
     "clangd",
-    "clang-format",
+    "cmake-language-server",
+    "fortls",
+    "pyright",
+    "rust-analyzer",
+    "black",
+    "isort",
+    "stylua",
+    "clang-format"
   },
 }
 
@@ -56,4 +77,24 @@ M.nvimtree = {
   },
 }
 
+M.blankline = {
+  indentLine_enabled = 1,
+  filetype_exclude = {
+    "help",
+    "terminal",
+    "lazy",
+    "lspinfo",
+    "TelescopePrompt",
+    "TelescopeResults",
+    "mason",
+    "nvdash",
+    "nvcheatsheet",
+    "",
+  },
+  buftype_exclude = { "terminal" },
+  show_trailing_blankline_indent = false,
+  show_first_indent_level = false,
+  show_current_context = true,
+  show_current_context_start = false,
+}
 return M

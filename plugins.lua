@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -21,13 +21,26 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
-
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    version = "2.20.7",
+    init = function()
+      require("core.utils").lazy_load "indent-blankline.nvim"
+    end,
+    opts = function()
+      return overrides.blankline
+    end,
+    config = function(_, opts)
+      require("core.utils").load_mappings "blankline"
+      dofile(vim.g.base46_cache .. "blankline")
+      require("indent_blankline").setup(opts)
+    end,
+  },
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
-
   {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
@@ -37,6 +50,20 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local def = require "plugins.configs.cmp"
+      local cmp = require "cmp"
+      local override = {
+        mapping = {
+          ["<C-j>"] = cmp.mapping.select_next_item(),
+          ["<C-k>"] = cmp.mapping.select_prev_item(),
+        },
+      }
+      return vim.tbl_deep_extend("force", def, override)
+    end,
+  },
 
   -- Install a plugin
   {
@@ -45,6 +72,77 @@ local plugins = {
     config = function()
       require("better_escape").setup()
     end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = false,
+  },
+  {
+    "windwp/nvim-autopairs",
+    enabled = false,
+  },
+  {
+    "NvChad/nvterm",
+    init = function()
+      require("core.utils").load_mappings "nvterm"
+    end,
+    config = function(_, opts)
+      require "base46.term"
+      require("nvterm").setup {
+        terminals = {
+          type_opts = {
+            float = {
+              relative = "editor",
+              row = 0.05,
+              col = 0.05,
+              width = 0.9,
+              height = 0.9,
+            },
+          },
+        },
+      }
+    end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "calvinku96/telescope_tags",
+    },
+    opts = function()
+      local def = require "plugins.configs.telescope"
+      local new = {
+        extensions_list = { "ctags" },
+      }
+      return vim.tbl_deep_extend("force", def, new)
+    end,
+  },
+  {
+    "calvinku96/vim-latex",
+    branch = "own",
+    ft = "tex",
+  },
+  {
+    "junegunn/vim-easy-align",
+    lazy = false,
+  },
+  {
+    "ntpeters/vim-better-whitespace",
+    lazy = false,
+    config = function()
+      vim.g["better_whitespace_enabled"] = 0
+      vim.g["strip_whitespace_on_save"] = 1
+      vim.g["strip_whitespace_confirm"] = 0
+    end,
+  },
+  {
+    "mbbill/undotree",
+    cmd = {
+      "UndotreeToggle",
+    },
+  },
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
   },
 
   -- To make a plugin not be loaded
