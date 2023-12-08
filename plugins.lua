@@ -57,8 +57,8 @@ local plugins = {
       local cmp = require "cmp"
       local override = {
         mapping = {
-          ["<C-j>"] = cmp.mapping.select_next_item(),
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<C-j>"] = cmp.mapping.select_next_item { behaviour = cmp.SelectBehavior.Insert },
+          ["<C-k>"] = cmp.mapping.select_prev_item { behaviour = cmp.SelectBehavior.Insert },
         },
       }
       return vim.tbl_deep_extend("force", def, override)
@@ -86,7 +86,7 @@ local plugins = {
     init = function()
       require("core.utils").load_mappings "nvterm"
     end,
-    config = function(_, opts)
+    config = function()
       require "base46.term"
       require("nvterm").setup {
         terminals = {
@@ -109,9 +109,18 @@ local plugins = {
       "calvinku96/telescope_tags",
     },
     opts = function()
+      local actions = require "telescope.actions"
       local def = require "plugins.configs.telescope"
       local new = {
         extensions_list = { "ctags" },
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+            },
+          },
+        },
       }
       return vim.tbl_deep_extend("force", def, new)
     end,
