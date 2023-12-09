@@ -109,6 +109,7 @@ M.general = {
       end,
       "New terminal",
     },
+    ["<leader>tl"] = { "<cmd> LazyGit <CR>", "lazygit" },
   },
   t = {
     ["<M-h>"] = { "<C-w>h", "Window left" },
@@ -180,6 +181,12 @@ M.lspconfig = {
       end,
       "Toggle diagnostics",
     },
+    ["<leader>k"] = {
+      function()
+        vim.diagnostic.open_float()
+      end,
+      "Diagnostics float",
+    },
   },
 }
 
@@ -223,7 +230,6 @@ M.nvterm = {
       end,
       "New horizontal term",
     },
-
     ["<leader>v"] = {
       function()
         require("nvterm.terminal").new "vertical"

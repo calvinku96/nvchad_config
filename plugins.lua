@@ -153,6 +153,14 @@ local plugins = {
     "rust-lang/rust.vim",
     ft = "rust",
   },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    cmd = { "LazyGit" },
+  },
 
   -- To make a plugin not be loaded
   -- {
