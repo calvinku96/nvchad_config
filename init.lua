@@ -117,3 +117,4 @@ vim.g.highlighturl_enabled = false
 vim.g.Tex_DefaultTargetFormat = "pdf"
 vim.g.Tex_MultipleCompileFormats = "pdf"
 vim.g.diagnostics_mode = 0
+vim.diagnostic.disable()
