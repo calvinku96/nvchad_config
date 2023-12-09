@@ -30,7 +30,7 @@ M.treesitter = {
     "latex",
   },
   indent = {
-    enable = true,
+    enable = false,
     -- disable = {
     --   "python"
     -- },
@@ -45,7 +45,7 @@ M.treesitter = {
 }
 
 M.mason = {
-  PATH="append",
+  PATH = "append",
   ensure_installed = {
     "lua-language-server",
     "bash-language-server",
@@ -57,7 +57,7 @@ M.mason = {
     "black",
     "isort",
     "stylua",
-    "clang-format"
+    "clang-format",
   },
 }
 
