@@ -110,7 +110,7 @@ M.general = {
       "New terminal",
     },
     ["<leader>tl"] = { "<cmd> LazyGit <CR>", "lazygit" },
-    ["fj"] = { "<Esc>" },
+    ["fj"] = { "<cmd> noh <CR>", "Clear highlights" },
   },
   t = {
     ["<M-h>"] = { "<C-w>h", "Window left" },
