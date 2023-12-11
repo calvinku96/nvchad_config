@@ -171,6 +171,16 @@ M.disabled = {
 
 M.lspconfig = {
   n = {
+    ["<leader>B"] = {
+      function()
+        if vim.diagnostic.is_disabled() then
+          print "Diagnostics disabled"
+        else
+          print "Diagnostics enabled"
+        end
+      end,
+      "Toggle diagnostics",
+    },
     ["<leader>d"] = {
       function()
         local d = vim.diagnostic
@@ -187,6 +197,12 @@ M.lspconfig = {
         vim.diagnostic.open_float()
       end,
       "Diagnostics float",
+    },
+    ["<leader>lq"] = {
+      function()
+        vim.diagnostic.setqflist()
+      end,
+      "Diagnostics setqflist",
     },
   },
 }
