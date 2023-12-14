@@ -186,8 +186,10 @@ M.lspconfig = {
         local d = vim.diagnostic
         if d.is_disabled() then
           d.enable()
+          print "Diagnostics enabled"
         else
           d.disable()
+          print "Diagnostics disabled"
         end
       end,
       "Toggle diagnostics",
