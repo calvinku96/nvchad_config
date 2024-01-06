@@ -172,6 +172,11 @@ local plugins = {
             },
           },
         },
+        pickers = {
+          find_files = {
+            follow = true,
+          },
+        },
       }
       return vim.tbl_deep_extend("force", def, new)
     end,
